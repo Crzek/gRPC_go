@@ -1,0 +1,29 @@
+syntax = "proto3"; // version de protobuff
+
+package student; // paquete
+
+option go_package = "platzi.com/go/grpc;studentepd"; // paquete de go
+
+// Definición de la estructura de un estudiante
+// importante los numeros de los campos (NO REPETIR)
+message Student {
+    string id = 1; // campo 1
+    string name = 2; // campo 2
+    string email = 3; // campo 3
+    int32 age = 4; // campo 4
+}
+
+message GetStudentRequest {
+  string id = 1;
+}
+
+message SetStudentResponse {
+  string id = 1;
+}
+
+service StudentService {
+  // Unary method: GetStudent
+  rpc GetStudent(GetStudentRequest) returns (Student);
+  // Unary method: SetStudent
+  rpc SetStudent(Student) returns (SetStudentResponse);
+}
