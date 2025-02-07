@@ -1,12 +1,18 @@
-version: '3.7'
+version: '3.9'
 
 services:
   go-server:
-    image: golang:bookworm
+    build: .
+    image: go-server:1.0
     container_name: go-server
+    # stdin_open and tty are required to keep the container running
+    # stdin_open: true → Mantiene el STDIN abierto, lo que permite la interacción con el contenedor incluso si no hay entrada de usuario inmediata.
+    # tty: true → Asigna un pseudo-TTY (teletipo virtual), permitiendo un entorno interactivo, útil para ejecutar bash o herramientas que requieren una terminal.
+    # stdin_open: true
+    # tty: true
     ports:
       - "8080:8080"
     volumes:
       - .:/go/src/app
     working_dir: /go/src/app
-    command: sleep infinity
+    command: bash
